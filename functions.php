@@ -3,11 +3,9 @@
   return untrailingslashit( plugin_dir_path( __FILE__ ) );
  
 }
-
 /**
  * Change default woocommerce cart-shipping template
  */
-
 function ap_change_wc_template($template, $template_name, $template_path) {
     if ($template_name == 'cart/cart-shipping.php') {
         $template = ap_plugin_path().'/template/cart-shipping.php';
