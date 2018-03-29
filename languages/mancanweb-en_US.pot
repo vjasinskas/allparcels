@@ -1,0 +1,286 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-27 16:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: functions.php:88
+msgid "Terminalas"
+msgstr ""
+
+#: functions.php:105 functions.php:106
+msgid "Export XML"
+msgstr ""
+
+#: functions.php:251
+#, php-format
+msgid "Post exported."
+msgid_plural "%s posts exported."
+msgstr[0] ""
+msgstr[1] ""
+
+#: main.php:36
+msgid "Allparcels į rankas"
+msgstr ""
+
+#: main.php:37
+msgid "Įgalina pristatymą kurjeriu."
+msgstr ""
+
+#: main.php:92
+msgid "Paštomatas: "
+msgstr ""
+
+#: main.php:101
+msgid "Pašto skyrius: "
+msgstr ""
+
+#: main.php:109
+msgid "Pristatymo punktas: "
+msgstr ""
+
+#: main.php:148
+msgid "Allparcels į paštomatą"
+msgstr ""
+
+#: main.php:149
+msgid "Įgalina pristatymą į paštomatą"
+msgstr ""
+
+#: main.php:202
+msgid "Allparcels į pašto skyrių"
+msgstr ""
+
+#: main.php:203
+msgid "Įgalina pristatymą į pašto skyrių"
+msgstr ""
+
+#: main.php:255
+msgid "Allparcels į siuntų atsiėmimo tašką"
+msgstr ""
+
+#: main.php:256
+msgid "Įgalina pristatymą į siuntų atsiėmimo tašką"
+msgstr ""
+
+#: includes/help_buttons.php:9
+msgid "Dokumentacija"
+msgstr ""
+
+#: includes/help_buttons.php:21
+msgid "Nustatymai"
+msgstr ""
+
+#: includes/help_buttons.php:58
+msgid "Allparcels nustatymai"
+msgstr ""
+
+#: includes/help_buttons.php:60
+msgid ""
+"Kurjerius ir pristatymo būdus reikia nurodyti redaguojant pristatymo zonas"
+msgstr ""
+
+#: includes/help_buttons.php:61
+msgid "Įveskite API kodą"
+msgstr ""
+
+#: includes/settings-pastomatas.php:30 includes/settings-rankas.php:30
+#: includes/settings-skyrius.php:30 includes/settings-taskas.php:30
+msgid "Pavadinimas"
+msgstr ""
+
+#: includes/settings-pastomatas.php:32 includes/settings-rankas.php:32
+#: includes/settings-skyrius.php:32 includes/settings-taskas.php:32
+msgid "Pavadinimas matosi atsiskaitymo puslapyje."
+msgstr ""
+
+#: includes/settings-pastomatas.php:33
+msgid "Paštomatai"
+msgstr ""
+
+#: includes/settings-pastomatas.php:37 includes/settings-rankas.php:37
+#: includes/settings-skyrius.php:37 includes/settings-taskas.php:37
+msgid "Kaina"
+msgstr ""
+
+#: includes/settings-pastomatas.php:48 includes/settings-pastomatas.php:64
+#: includes/settings-rankas.php:33 includes/settings-rankas.php:48
+#: includes/settings-rankas.php:63 includes/settings-skyrius.php:48
+#: includes/settings-skyrius.php:64 includes/settings-taskas.php:48
+#: includes/settings-taskas.php:64
+msgid "Kurjeris"
+msgstr ""
+
+#: includes/settings-pastomatas.php:50 includes/settings-skyrius.php:50
+#: includes/settings-taskas.php:50
+msgid "Norėdami pasirinkti daugiau nei vieną kurjerį, laikykite įspaudę CTRL."
+msgstr ""
+
+#: includes/settings-pastomatas.php:71 includes/settings-rankas.php:70
+#: includes/settings-skyrius.php:71 includes/settings-taskas.php:71
+#: template/cart-shipping.php:227 template/cart-shipping.php:320
+#: template/cart-shipping.php:415
+msgid "Klaida: įveskite API kodą"
+msgstr ""
+
+#: includes/settings-pastomatas.php:80 includes/settings-rankas.php:78
+#: includes/settings-skyrius.php:80 includes/settings-taskas.php:80
+msgid "Express paslauga"
+msgstr ""
+
+#: includes/settings-pastomatas.php:85 includes/settings-pastomatas.php:103
+#: includes/settings-pastomatas.php:119 includes/settings-pastomatas.php:136
+#: includes/settings-pastomatas.php:153 includes/settings-pastomatas.php:170
+#: includes/settings-pastomatas.php:187 includes/settings-pastomatas.php:204
+#: includes/settings-rankas.php:83 includes/settings-rankas.php:100
+#: includes/settings-rankas.php:117 includes/settings-rankas.php:134
+#: includes/settings-rankas.php:151 includes/settings-rankas.php:168
+#: includes/settings-rankas.php:185 includes/settings-rankas.php:202
+#: includes/settings-skyrius.php:85 includes/settings-skyrius.php:103
+#: includes/settings-skyrius.php:119 includes/settings-skyrius.php:136
+#: includes/settings-skyrius.php:153 includes/settings-skyrius.php:170
+#: includes/settings-skyrius.php:187 includes/settings-skyrius.php:204
+#: includes/settings-taskas.php:85 includes/settings-taskas.php:103
+#: includes/settings-taskas.php:119 includes/settings-taskas.php:136
+#: includes/settings-taskas.php:153 includes/settings-taskas.php:170
+#: includes/settings-taskas.php:187 includes/settings-taskas.php:204
+msgid "Paslauga gali papildomai kainuoti."
+msgstr ""
+
+#: includes/settings-pastomatas.php:89 includes/settings-pastomatas.php:106
+#: includes/settings-pastomatas.php:123 includes/settings-pastomatas.php:140
+#: includes/settings-pastomatas.php:157 includes/settings-pastomatas.php:174
+#: includes/settings-pastomatas.php:191 includes/settings-pastomatas.php:208
+#: includes/settings-rankas.php:87 includes/settings-rankas.php:104
+#: includes/settings-rankas.php:121 includes/settings-rankas.php:138
+#: includes/settings-rankas.php:155 includes/settings-rankas.php:172
+#: includes/settings-rankas.php:189 includes/settings-rankas.php:206
+#: includes/settings-skyrius.php:89 includes/settings-skyrius.php:106
+#: includes/settings-skyrius.php:123 includes/settings-skyrius.php:140
+#: includes/settings-skyrius.php:157 includes/settings-skyrius.php:174
+#: includes/settings-skyrius.php:191 includes/settings-skyrius.php:208
+#: includes/settings-taskas.php:89 includes/settings-taskas.php:106
+#: includes/settings-taskas.php:123 includes/settings-taskas.php:140
+#: includes/settings-taskas.php:157 includes/settings-taskas.php:174
+#: includes/settings-taskas.php:191 includes/settings-taskas.php:208
+msgid "Taip"
+msgstr ""
+
+#: includes/settings-pastomatas.php:90 includes/settings-pastomatas.php:107
+#: includes/settings-pastomatas.php:124 includes/settings-pastomatas.php:141
+#: includes/settings-pastomatas.php:158 includes/settings-pastomatas.php:175
+#: includes/settings-pastomatas.php:192 includes/settings-pastomatas.php:209
+#: includes/settings-rankas.php:88 includes/settings-rankas.php:105
+#: includes/settings-rankas.php:122 includes/settings-rankas.php:139
+#: includes/settings-rankas.php:156 includes/settings-rankas.php:173
+#: includes/settings-rankas.php:190 includes/settings-rankas.php:207
+#: includes/settings-skyrius.php:90 includes/settings-skyrius.php:107
+#: includes/settings-skyrius.php:124 includes/settings-skyrius.php:141
+#: includes/settings-skyrius.php:158 includes/settings-skyrius.php:175
+#: includes/settings-skyrius.php:192 includes/settings-skyrius.php:209
+#: includes/settings-taskas.php:90 includes/settings-taskas.php:107
+#: includes/settings-taskas.php:124 includes/settings-taskas.php:141
+#: includes/settings-taskas.php:158 includes/settings-taskas.php:175
+#: includes/settings-taskas.php:192 includes/settings-taskas.php:209
+msgid "Ne"
+msgstr ""
+
+#: includes/settings-pastomatas.php:97 includes/settings-rankas.php:95
+#: includes/settings-skyrius.php:97 includes/settings-taskas.php:97
+msgid "Pristatymas šeštadienį"
+msgstr ""
+
+#: includes/settings-pastomatas.php:114 includes/settings-rankas.php:112
+#: includes/settings-skyrius.php:114 includes/settings-taskas.php:114
+msgid "Dokumentų grąžinimas"
+msgstr ""
+
+#: includes/settings-pastomatas.php:131 includes/settings-rankas.php:129
+#: includes/settings-skyrius.php:131 includes/settings-taskas.php:131
+msgid "Savarankiškas siuntos padėjimas į terminalą"
+msgstr ""
+
+#: includes/settings-pastomatas.php:148 includes/settings-rankas.php:146
+#: includes/settings-skyrius.php:148 includes/settings-taskas.php:148
+msgid "Informuoti siuntėją apie siuntą el.paštu"
+msgstr ""
+
+#: includes/settings-pastomatas.php:165 includes/settings-rankas.php:163
+#: includes/settings-skyrius.php:165 includes/settings-taskas.php:165
+msgid "Informuoti siuntėją apie siuntą sms"
+msgstr ""
+
+#: includes/settings-pastomatas.php:182 includes/settings-rankas.php:180
+#: includes/settings-skyrius.php:182 includes/settings-taskas.php:182
+msgid "Informuoti gavėją apie siuntą el.paštu"
+msgstr ""
+
+#: includes/settings-pastomatas.php:199 includes/settings-rankas.php:197
+#: includes/settings-skyrius.php:199 includes/settings-taskas.php:199
+msgid "Informuoti gavėją apie siuntą sms"
+msgstr ""
+
+#: includes/settings-skyrius.php:33
+msgid "Pašto skyriai"
+msgstr ""
+
+#: includes/settings-taskas.php:33
+msgid "Pristatymo taškai"
+msgstr ""
+
+#: template/cart-shipping.php:20
+#, php-format
+msgid "Shipping #%d"
+msgstr ""
+
+#: template/cart-shipping.php:22
+msgid "Pristatymas"
+msgstr ""
+
+#: template/cart-shipping.php:209 template/cart-shipping.php:302
+#: template/cart-shipping.php:397
+msgid "Pasirinkite..."
+msgstr ""
+
+#: template/cart-shipping.php:220 template/cart-shipping.php:313
+#: template/cart-shipping.php:408
+msgid "Mieste neradome paštomatų"
+msgstr ""
+
+#: template/cart-shipping.php:469
+msgid "Please use the shipping calculator to see available shipping methods."
+msgstr ""
+
+#: template/cart-shipping.php:473
+msgid ""
+"Please continue to the checkout and enter your full address to see if there "
+"are any available shipping methods."
+msgstr ""
+
+#: template/cart-shipping.php:477
+msgid "Please fill in your details to see available shipping methods."
+msgstr ""
+
+#: template/cart-shipping.php:487 template/cart-shipping.php:494
+msgid ""
+"There don&lsquo;t seem to be available shipping methods. Please double check "
+"your address, or contact us if you need any help."
+msgstr ""
+
+#: template/cart-shipping.php:509
+msgid "Shipping"
+msgstr ""
