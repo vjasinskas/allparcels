@@ -34,7 +34,7 @@ function validate_extra_selection() {
 			break;
     endswitch;
 
-}
+} 
 
 add_action( 'woocommerce_checkout_update_order_meta', 'ap_custom_checkout_field_update_order_meta' );
 
