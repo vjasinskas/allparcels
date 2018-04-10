@@ -85,7 +85,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		                                $string .= '<select name="' . $method->id . '" id="input_' . $method->id . '" class="allparcels_select" required>';
 		                                $string .= '<option value="">' . __( "Pasirinkite...", "mancanweb" ) . '</option>';
 		                                foreach ( $pastomatai as $key => $value ) {
-			                                $string .= '<option myval="' . $value ['courierIdentifier'] . '" value="' . $key . '">' .
+			                                $string .= '<option value="' . $key . '___' . $value['courierIdentifier'] . '">' .
 			                                           $couriers [ $value ['courierIdentifier'] ] . ' \'' . $value ['name'] . '\' ' . $value ['address']
 			                                           . ' ,' . $value ['postCode'] . ', ' . $value ['city'] . '</option>';
 		                                }

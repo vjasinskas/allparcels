@@ -34,7 +34,7 @@ function validate_extra_selection() {
 			break;
     endswitch;
 
-} 
+}
 
 add_action( 'woocommerce_checkout_update_order_meta', 'ap_custom_checkout_field_update_order_meta' );
 
@@ -44,7 +44,11 @@ function ap_custom_checkout_field_update_order_meta( $order_id ) {
 
     if ( isset($_POST['allparcels_pastomatas']) ):
         $obj = new WC_allparcels_pastomatas($packages[0]['rates'][$chosen_methods[0]]->instance_id);
-        update_post_meta( $order_id, 'terminalui', sanitize_text_field( $_POST['allparcels_pastomatas'] ) );
+        $raw_val=explode('___', sanitize_text_field($_POST['allparcels_pastomatas']) );
+
+        update_post_meta( $order_id, 'terminalui', sanitize_text_field( $raw_val[0] ) );
+	    update_post_meta( $order_id, 'kurjeriui', sanitize_text_field( $raw_val[1] ) );
+
 	    update_post_meta( $order_id, 'express_paslauga', $obj->get_option('express_paslauga') );
 	    update_post_meta( $order_id, 'pristatymas_sestadieni', $obj->get_option('pristatymas_sestadieni') );
 	    update_post_meta( $order_id, 'dokumentu_grazinimas', $obj->get_option('dokumentu_grazinimas') );
@@ -57,7 +61,11 @@ function ap_custom_checkout_field_update_order_meta( $order_id ) {
 
     if (  isset($_POST['allparcels_skyrius']) ):
 	    $obj = new WC_allparcels_skyrius($packages[0]['rates'][$chosen_methods[0]]->instance_id);
-        update_post_meta( $order_id, 'skyriui', sanitize_text_field( $_POST['allparcels_skyrius'] ) );
+	    $raw_val=explode('___', sanitize_text_field($_POST['allparcels_skyrius']) );
+
+	    update_post_meta( $order_id, 'skyriui', sanitize_text_field( $raw_val[0] ) );
+	    update_post_meta( $order_id, 'kurjeriui', sanitize_text_field( $raw_val[1] ) );
+
 	    update_post_meta( $order_id, 'express_paslauga', $obj->get_option('express_paslauga') );
 	    update_post_meta( $order_id, 'pristatymas_sestadieni', $obj->get_option('pristatymas_sestadieni') );
 	    update_post_meta( $order_id, 'dokumentu_grazinimas', $obj->get_option('dokumentu_grazinimas') );
@@ -70,7 +78,11 @@ function ap_custom_checkout_field_update_order_meta( $order_id ) {
 
     if (  isset($_POST['allparcels_taskas']) ):
 	    $obj = new WC_allparcels_taskas($packages[0]['rates'][$chosen_methods[0]]->instance_id);
-        update_post_meta( $order_id, 'taskui', sanitize_text_field( $_POST['allparcels_taskas'] ) );
+	    $raw_val=explode('___', sanitize_text_field($_POST['allparcels_taskas']) );
+
+	    update_post_meta( $order_id, 'taskui', sanitize_text_field( $raw_val[0] ) );
+	    update_post_meta( $order_id, 'kurjeriui', sanitize_text_field( $raw_val[1] ) );
+
 	    update_post_meta( $order_id, 'express_paslauga', $obj->get_option('express_paslauga') );
 	    update_post_meta( $order_id, 'pristatymas_sestadieni', $obj->get_option('pristatymas_sestadieni') );
 	    update_post_meta( $order_id, 'dokumentu_grazinimas', $obj->get_option('dokumentu_grazinimas') );
