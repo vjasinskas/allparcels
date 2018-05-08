@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <ul id="shipping_method">
 				<?php foreach ( $available_methods as $method ) : ?>
 					<?php
-                        if(in_array($method->id, array('allparcels_rankas', 'allparcels_skyrius', 'allparcels_taskas', 'allparcels_pastomatas')) ){
+                        if(in_array($method->method_id, array('allparcels_rankas', 'allparcels_skyrius', 'allparcels_taskas', 'allparcels_pastomatas')) ){
                             if(get_option( 'allparcels_api') == '') {
                                 if($chosen_method == $method->id)
                                     echo
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         </select>';
                                 continue;
                             }else{
-                                switch ($method->id):
+                                switch ($method->method_id):
                                     case 'allparcels_rankas':
                                         $allparcels_obj = new WC_allparcels_rankas($method->instance_id);
                                         $type='*';
@@ -56,7 +56,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         break;
                                 endswitch;
 
-                                if( (empty($allparcels_obj->get_option('kurjeris')) && $method->id != 'allparcels_rankas' ) || ( empty($allparcels_obj->get_option('pagrindinis_kurjeris')) && $method->id == 'allparcels_rankas' ) )
+                                if( (empty($allparcels_obj->get_option('kurjeris')) && $method->method_id != 'allparcels_rankas' ) || ( empty($allparcels_obj->get_option('pagrindinis_kurjeris')) && $method->method_id == 'allparcels_rankas' ) )
                                     continue;
 
 	                            printf( '<li><input type="radio" name="shipping_method[%1$d]" data-index="%1$d" id="shipping_method_%1$d_%2$s" value="%3$s" class="shipping_method allparcels_input" %4$s />
@@ -75,14 +75,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	                            foreach ( $allparcels_obj->get_option('kurjeris') as $value ) {
 	                                $terminals=Terminals::getListForSelect($value, $miestas, $type);
-	                                foreach($terminals as $terminal){
+	                                foreach($terminals as $terminal)
 		                                $pastomatai [ $terminal ['identifier'] ] = $terminal;
-                                    }
 	                            }
 
                                 if($chosen_method == $method->id) {
 	                                if ( sizeof( $pastomatai ) > 0  && $type != '*') {
-		                                $string .= '<select name="' . $method->id . '" id="input_' . $method->id . '" class="allparcels_select" required>';
+		                                $string .= '<select name="' . $method->method_id . '" id="input_' . $method->method_id . '" class="allparcels_select" required>';
 		                                $string .= '<option value="">' . __( "Pasirinkite...", "mancanweb" ) . '</option>';
 		                                foreach ( $pastomatai as $key => $value ) {
 			                                $string .= '<option value="' . $key . '___' . $value['courierIdentifier'] . '">' .
@@ -91,10 +90,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		                                }
 		                                $string .= '</select>';
 		                                printf( $string );
-	                                }elseif ($type == '*'){
-	                                    echo '<input type="hidden" name="'.$method->id.'" id="input_'.$method->id.'" value="'.$allparcels_obj->get_option('pagrindinis_kurjeris').'" />';
-                                    }else{
-                                        $string .='<select name="'.$method->id.'" id="input_'.$method->id.'"  required>';
+	                                }elseif ($type == '*')
+	                                    echo '<input type="hidden" name="'.$method->method_id.'" id="input_'.$method->method_id.'" value="'.$allparcels_obj->get_option('pagrindinis_kurjeris').'" />';
+                                    else{
+                                        $string .='<select name="'.$method->method_id.'" id="input_'.$method->method_id.'"  required>';
                                         $string .='<option value="">'.__('Nurodytame mieste šis pristatymas negalimas.', 'mancanweb').'</option>';
                                         $string .= '</select>';
                                         printf($string);
@@ -113,18 +112,17 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </li>
 				<?php endforeach; ?>
             </ul>
-		<?php elseif ( WC()->customer->has_calculated_shipping() ) : ?>
-			<?php echo apply_filters( is_cart() ? 'woocommerce_cart_no_shipping_available_html' : 'woocommerce_no_shipping_available_html', wpautop( __( 'There are no shipping methods available. Please ensure that your address has been entered correctly, or contact us if you need any help.', 'woocommerce' ) ) ); ?>
-		<?php elseif ( ! is_cart() ) : ?>
-			<?php echo wpautop( __( 'Enter your full address to see shipping costs.', 'woocommerce' ) ); ?>
-		<?php endif; ?>
+		<?php
+            elseif ( WC()->customer->has_calculated_shipping() ) :
+                echo apply_filters( is_cart() ? 'woocommerce_cart_no_shipping_available_html' : 'woocommerce_no_shipping_available_html', wpautop( __( 'There are no shipping methods available. Please ensure that your address has been entered correctly, or contact us if you need any help.', 'woocommerce' ) ) );
+            elseif ( ! is_cart() ) :
+                echo wpautop( __( 'Enter your full address to see shipping costs.', 'woocommerce' ) );
+            endif;
 
-		<?php if ( $show_package_details ) : ?>
-			<?php echo '<p class="woocommerce-shipping-contents"><small>' . esc_html( $package_details ) . '</small></p>'; ?>
-		<?php endif; ?>
-
-		<?php if ( ! empty( $show_shipping_calculator ) ) : ?>
-			<?php woocommerce_shipping_calculator(); ?>
-		<?php endif; ?>
+            if ( $show_package_details )
+                echo '<p class="woocommerce-shipping-contents"><small>' . esc_html( $package_details ) . '</small></p>';
+            if ( ! empty( $show_shipping_calculator ) )
+                woocommerce_shipping_calculator();
+        ?>
     </td>
 </tr>

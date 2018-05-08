@@ -1,43 +1,34 @@
-<?php function ap_plugin_path() {
- 
-  return untrailingslashit( plugin_dir_path( __FILE__ ) );
- 
-}
-/**
- * Change default woocommerce cart-shipping template
- */
-function ap_change_wc_template($template, $template_name, $template_path) {
-    if ($template_name == 'cart/cart-shipping.php') {
-        $template = ap_plugin_path().'/template/cart-shipping.php';
-    }
-    return $template;
+<?php
+function ap_plugin_path() {
+    return untrailingslashit( plugin_dir_path( __FILE__ ) );
 }
 
 add_filter('woocommerce_locate_template', 'ap_change_wc_template', 20, 3);
-
+function ap_change_wc_template($template, $template_name, $template_path) {
+    if ($template_name == 'cart/cart-shipping.php')
+        $template = ap_plugin_path().'/template/cart-shipping.php';
+    return $template;
+}
 
 add_action('woocommerce_checkout_process', 'validate_extra_selection');
 function validate_extra_selection() {
-
-	switch ($_POST['shipping_method'][0]):
-        case 'allparcels_pastomatas':
+	switch (true):
+        case strpos($_POST['shipping_method'][0], 'allparcels_pastomatas') !== false:
             if($_POST['allparcels_pastomatas'] == '' )
 	            wc_add_notice( __('Pasirinkite paštomatą.', 'mancanweb'), 'error' );
             break;
-		case 'allparcels_skyrius':
+		case strpos($_POST['shipping_method'][0], 'allparcels_skyrius') !== false:
 			if($_POST['allparcels_skyrius'] == '' )
 				wc_add_notice( __('Pasirinkite pašto skyrių.', 'mancanweb'), 'error' );
 			break;
-		case 'allparcels_taskas':
+		case strpos($_POST['shipping_method'][0], 'allparcels_taskas') !== false:
 			if($_POST['allparcels_taskas'] == '' )
 				wc_add_notice( __('Pasirinkite atsiėmimo tašką.', 'mancanweb'), 'error' );
 			break;
     endswitch;
-
 }
 
 add_action( 'woocommerce_checkout_update_order_meta', 'ap_custom_checkout_field_update_order_meta' );
-
 function ap_custom_checkout_field_update_order_meta( $order_id ) {
 	$packages = WC()->shipping->get_packages();
 	$chosen_methods = WC()->session->get( 'chosen_shipping_methods' );
@@ -48,7 +39,6 @@ function ap_custom_checkout_field_update_order_meta( $order_id ) {
 
         update_post_meta( $order_id, 'terminalui', sanitize_text_field( $raw_val[0] ) );
 	    update_post_meta( $order_id, 'kurjeriui', sanitize_text_field( $raw_val[1] ) );
-
 	    update_post_meta( $order_id, 'express_paslauga', $obj->get_option('express_paslauga') );
 	    update_post_meta( $order_id, 'pristatymas_sestadieni', $obj->get_option('pristatymas_sestadieni') );
 	    update_post_meta( $order_id, 'dokumentu_grazinimas', $obj->get_option('dokumentu_grazinimas') );
@@ -65,7 +55,6 @@ function ap_custom_checkout_field_update_order_meta( $order_id ) {
 
 	    update_post_meta( $order_id, 'skyriui', sanitize_text_field( $raw_val[0] ) );
 	    update_post_meta( $order_id, 'kurjeriui', sanitize_text_field( $raw_val[1] ) );
-
 	    update_post_meta( $order_id, 'express_paslauga', $obj->get_option('express_paslauga') );
 	    update_post_meta( $order_id, 'pristatymas_sestadieni', $obj->get_option('pristatymas_sestadieni') );
 	    update_post_meta( $order_id, 'dokumentu_grazinimas', $obj->get_option('dokumentu_grazinimas') );
@@ -82,7 +71,6 @@ function ap_custom_checkout_field_update_order_meta( $order_id ) {
 
 	    update_post_meta( $order_id, 'taskui', sanitize_text_field( $raw_val[0] ) );
 	    update_post_meta( $order_id, 'kurjeriui', sanitize_text_field( $raw_val[1] ) );
-
 	    update_post_meta( $order_id, 'express_paslauga', $obj->get_option('express_paslauga') );
 	    update_post_meta( $order_id, 'pristatymas_sestadieni', $obj->get_option('pristatymas_sestadieni') );
 	    update_post_meta( $order_id, 'dokumentu_grazinimas', $obj->get_option('dokumentu_grazinimas') );
@@ -108,16 +96,17 @@ function ap_custom_checkout_field_update_order_meta( $order_id ) {
 }
 
 add_action( 'woocommerce_admin_order_data_after_billing_address', 'ap_custom_checkout_field_display_admin_order_meta', 10, 1 );
-
 function ap_custom_checkout_field_display_admin_order_meta($order){
     echo '<p><strong>'.__('Terminalas').':</strong> ' . get_post_meta( $order->id, 'terminalui', true ) . '</p>';
 }
 
+add_filter ( 'woocommerce_order_formatted_shipping_address', 'ap_woo_custom_order_formatted_shipping_address', 20,20);
 function ap_woo_custom_order_formatted_shipping_address  ($address, $wc_order) {
 	$terminalui=get_post_meta ($wc_order->id, 'terminalui', true);
 	$skyriui=get_post_meta ($wc_order->id, 'skyriui', true);
 	$taskui=get_post_meta ($wc_order->id, 'taskui', true);
 	$string='';
+
 	if(!$terminalui and !$skyriui and !$taskui)
 		return $address;
 	else{
@@ -142,54 +131,40 @@ function ap_woo_custom_order_formatted_shipping_address  ($address, $wc_order) {
 		return $address;
 	}
 }
-add_filter ( 'woocommerce_order_formatted_shipping_address', 'ap_woo_custom_order_formatted_shipping_address', 20,20);
 
+add_filter('woocommerce_localisation_address_formats', 'ap_custom_address_formats');
 function ap_custom_address_formats( $formats ) {
 	$formats[ 'default' ]  = "{name}\n{company}\n{address_1} {address_2}\n{postcode} {city}";
 	return $formats;
 }
-add_filter('woocommerce_localisation_address_formats', 'ap_custom_address_formats');
 
-function ap_my_enqueue($hook) {
-	wp_enqueue_script( 'ap_my_custom_script', plugin_dir_url( __FILE__ ) . 'js/admin-script.js' );
-}
-add_action( 'admin_enqueue_scripts', 'ap_my_enqueue' );
-
-/**
- * Add bulk action to woocommerce orders list
- */
 
 add_action('admin_footer-edit.php', 'ap_order_export_as_xml');
-
 function ap_order_export_as_xml() {
-
     global $post_type;
-
-    if($post_type == 'shop_order') {
-    ?>
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            jQuery('<option>').val('export').text('<?php _e('Export XML')?>').appendTo("select[name='action']");
-            jQuery('<option>').val('export').text('<?php _e('Export XML')?>').appendTo("select[name='action2']");
-        });
-    </script>
+    if($post_type == 'shop_order') { ?>
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                jQuery('<option>').val('export').text('<?php _e('Export XML')?>').appendTo("select[name='action']");
+                jQuery('<option>').val('export').text('<?php _e('Export XML')?>').appendTo("select[name='action2']");
+            });
+        </script>
     <?php
     }
 }
 
 add_action('load-edit.php', 'ap_custom_bulk_action_export');
-
 function ap_custom_bulk_action_export() {
     global $typenow;
     $post_type = $typenow;
 
     if($post_type == 'shop_order') {
-
         $wp_list_table = _get_list_table('WP_Posts_List_Table');
         $action = $wp_list_table->current_action();
-
         $allowed_actions = array("export");
-        if(!in_array($action, $allowed_actions)) return;
+
+        if(!in_array($action, $allowed_actions))
+            return;
 
         check_admin_referer('bulk-posts');
 
@@ -207,9 +182,8 @@ function ap_custom_bulk_action_export() {
                 $value=$order->get_total();
                 $currency=get_woocommerce_currency();
                 $cod = '<cash_on_delivery> <value>'. $value .'</value><reference>'. $id .'</reference><currency>'. $currency .'</currency></cash_on_delivery>';
-             } else {
+             } else
                 $cod = '';
-             }
 
              if(get_post_meta( $id, 'terminalui', true ) != '')
 	             $parcelIdentifier=get_post_meta( $id, 'terminalui', true );
@@ -229,18 +203,18 @@ function ap_custom_bulk_action_export() {
             $infrecsms=get_post_meta( $id, 'informuoti_smsg', true );
             $dropoff=get_post_meta( $id, 'savarankiskas', true );
 
-                $items = $order->get_items();
-                $total_weight = 0;
-                    foreach( $items as $item ) {
-                        $item_metas = get_post_meta( $item['product_id'] );
-                        $weight = $item_metas['_weight']['0'];
-                        $quantity = $item['qty'];
-                        $item_weight = ( $weight * $quantity );
-                        $total_weight += $item_weight;
-                    }
-                    if($total_weight == 0){
-                        $total_weight = 1;
-                    }
+            $items = $order->get_items();
+            $total_weight = 0;
+                foreach( $items as $item ) {
+                    $item_metas = get_post_meta( $item['product_id'] );
+                    $weight = $item_metas['_weight']['0'];
+                    $quantity = $item['qty'];
+                    $item_weight = ( $weight * $quantity );
+                    $total_weight += $item_weight;
+                }
+                if($total_weight == 0)
+                    $total_weight = 1;
+
              $xml .='<shipment>'.'<reference>'.$id.'</reference>'
              .'<weight>'.$total_weight.'</weight>'.
              '<remark>'.'</remark>'.
@@ -279,7 +253,6 @@ function ap_custom_bulk_admin_notices_export() {
     }
 }
 
-// Register style sheet.
 add_action( 'wp_enqueue_scripts', 'ap_register_plugin_styles' );
 function ap_register_plugin_styles() {
     wp_register_style( 'allparcels', plugins_url().'/'.dirname( plugin_basename(__FILE__) ).'/css/style.css' );
