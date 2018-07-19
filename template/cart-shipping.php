@@ -73,11 +73,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 else
                                     $miestas = WC ()->customer->get_city ();
 
-	                            foreach ( $allparcels_obj->get_option('kurjeris') as $value ) {
-	                                $terminals=Terminals::getListForSelect($value, $miestas, $type);
-	                                foreach($terminals as $terminal)
-		                                $pastomatai [ $terminal ['identifier'] ] = $terminal;
-	                            }
+                                if( $allparcels_obj->get_option('kurjeris') != '')
+                                    foreach ( $allparcels_obj->get_option('kurjeris') as $value ) {
+                                        $terminals=Terminals::getListForSelect($value, $miestas, $type);
+                                        foreach($terminals as $terminal)
+                                            $pastomatai [ $terminal ['identifier'] ] = $terminal;
+                                    }
 
                                 if($chosen_method == $method->id) {
 	                                if ( sizeof( $pastomatai ) > 0  && $type != '*') {

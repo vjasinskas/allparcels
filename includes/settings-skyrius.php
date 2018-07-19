@@ -46,7 +46,14 @@ $settings = array (
                 'description' => $cost_desc,
                 'default' => '',
                 'desc_tip' => true 
-        ) 
+        ),
+        'free_delivery_cost' => array(
+	        'title' => __ ( 'Nemokamas pristatymas', 'mancanweb' ),
+	        'type' => 'text',
+	        'description' => __ ( 'Nemokamas pristatymas bus pritaikytas nuo įvestos sumos. (Laukelį palikti tuščią, norint nenaudoti šios funkcijos)', 'mancanweb' ),
+	        'default' => '',
+	        'desc_tip' => true
+        )
 );
 
 $shipping_classes = WC()->shipping->get_shipping_classes();

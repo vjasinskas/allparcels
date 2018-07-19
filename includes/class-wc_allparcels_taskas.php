@@ -106,6 +106,17 @@
 				if ( 'order' === $this->type && $highest_class_cost )
 					$rate['cost'] += $highest_class_cost;
 			}
+
+			if ( ! WC()->cart->prices_include_tax )
+				$amount = WC()->cart->cart_contents_total;
+			else
+				$amount = WC()->cart->cart_contents_total + WC()->cart->tax_total;
+
+			$free_delivery_cost=$this->get_option( 'free_delivery_cost');
+
+			if($amount >= $free_delivery_cost && $free_delivery_cost != '' && $free_delivery_cost != '0')
+				$rate['cost'] = 0;
+
 			// Add the rate
 			if ( $has_costs )
 				$this->add_rate( $rate );
