@@ -74,7 +74,7 @@ class Terminals
 			return false;
 		}
 
-		$url = 'http://toast.allparcels.com/api/parcel_terminals.json?showAll=1';
+		$url = 'https://toast.allparcels.com/api/parcel_terminals.json?showAll=1';
 		$token =get_option( 'allparcels_api' );
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, $url);
