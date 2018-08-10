@@ -31,15 +31,20 @@ class Terminals
      *
      * @return mixed
      */
-    static public function getTerminalsList(){
+    static public function getTerminalsList($identifier=null){
         global $wpdb;
 
-        $terminals=$wpdb->get_results( "SELECT * FROM wp_allparcels_terminals ;",ARRAY_A );
+        if($identifier == null)
+            $terminals=$wpdb->get_results( "SELECT * FROM wp_allparcels_terminals;",ARRAY_A );
+        else
+	        $terminals=$wpdb->get_results( "SELECT * FROM wp_allparcels_terminals WHERE identifier='$identifier';",ARRAY_A );
 
-       if(empty($terminals) or (int)$terminals[0]['data'] >= (int)$terminals[0]['data']+86400000){
-
+       if(empty($terminals) or time() - (int)$terminals[0]['data'] > 86400){
 	        Terminals::updateTerminalsList();
-            $terminals=$wpdb->get_results( "SELECT * FROM wp_allparcels_terminals ;",ARRAY_A );
+	       if($identifier == null)
+		       $terminals=$wpdb->get_results( "SELECT * FROM wp_allparcels_terminals;",ARRAY_A );
+	       else
+		       $terminals=$wpdb->get_results( "SELECT * FROM wp_allparcels_terminals WHERE identifier='$identifier';",ARRAY_A );
        }
         return json_encode($terminals);
     }
@@ -54,7 +59,7 @@ class Terminals
 
 		$wpdb->query("CREATE TABLE IF NOT EXISTS `wp_allparcels_terminals` (
 	      `id` int(11) NOT NULL auto_increment,         
-	      `identifier` varchar(250) COLLATE utf8_lithuanian_ci NOT NULL default '',     
+	      `identifier` varchar(250) COLLATE utf8_lithuanian_ci NOT NULL default '' UNIQUE,     
 	      `name` varchar(250) COLLATE utf8_lithuanian_ci NOT NULL default '',
 	      `address` varchar(250) COLLATE utf8_lithuanian_ci NOT NULL default '',
 	      `postCode` varchar(250) COLLATE utf8_lithuanian_ci NOT NULL default '',
@@ -69,10 +74,10 @@ class Terminals
 	        );"
 		);
 
-		if(get_option( 'allparcels_api' )==''){
-			$wpdb->get_results( "truncate wp_allparcels_terminals;" );
+		$wpdb->get_results( "truncate wp_allparcels_terminals;" );
+
+		if(get_option( 'allparcels_api' )=='')
 			return false;
-		}
 
 		$url = 'https://toast.allparcels.com/api/parcel_terminals.json?showAll=1';
 		$token =get_option( 'allparcels_api' );
@@ -90,15 +95,22 @@ class Terminals
 		$terminalList = json_decode ( $result, true );
 
 		foreach ($terminalList ['terminals'] as  $value) {
-			$wpdb->query( $wpdb->prepare(
-				"INSERT INTO wp_allparcels_terminals (identifier,name,address,postCode,city,
-                countryCode,courierIdentifier,type,comment,isActive,data) VALUES ('%s','%s',
-                '%s','%s',
-                '%s','%s',
-                '%s','%d',
-                '%s','%d','".round(microtime(true) * 1000)."') ;",$value['identifier'],
-				$value['name'],$value['address'],$value['postCode'],$value['city'],$value['countryCode'],
-				$value['courierIdentifier'],$value['type'],$value['comment'],$value['isActive']  ));
+			$wpdb->query(
+				"INSERT INTO wp_allparcels_terminals 
+					(identifier,name,address,postCode,city, countryCode,courierIdentifier,type,comment,isActive,data) 
+					VALUES ('".$value['identifier']."','".$value['name']."',
+			                '".$value['address']."','".$value['postCode']."',
+			                '".$value['city']."','".$value['countryCode']."',
+			                '".$value['courierIdentifier']."','".$value['type']."',
+			                '".$value['comment']."','".$value['isActive']."',
+			                '".time()."') 
+	                ON DUPLICATE KEY UPDATE 
+	                    name = '".$value['name']."',address = '".$value['address']."',
+	                    postCode = '".$value['postCode']."', city = '".$value['city']."', 
+	                    countryCode = '".$value['countryCode']."', courierIdentifier = '".$value['courierIdentifier']."',
+	                    type = '".$value['type']."', comment = '".$value['comment']."',
+	                    isActive = '".$value['isActive']."', data = '".time()."';"
+			);
 		}
 
 		return true;

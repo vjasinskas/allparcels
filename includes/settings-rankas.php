@@ -1,8 +1,6 @@
 <?php
 if (! defined ( 'ABSPATH' ))
     exit ();
-if(! class_exists( 'Terminals' ))
-	include_once('terminals.php');
 $temp = Terminals::carriersArray ();
 /**
  * Settings for allparcels courriers

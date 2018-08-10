@@ -4,7 +4,7 @@
 *Description: One place - all couriers
 * Text Domain: mancanweb
 * Domain Path: /languages
-*@version: 2.3.0
+*@version: 2.4.0
 *@author: mancanweb
 */
 if (! defined ( 'ABSPATH' ))
@@ -18,6 +18,9 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	include_once(untrailingslashit( plugin_dir_path( __FILE__ ) ).'/includes/help_buttons.php');
 
 	function allparcels_init() {
+		if ( ! class_exists( 'Terminals' ) )
+			require(untrailingslashit( plugin_dir_path( __FILE__ ) ).'/includes/terminals.php');
+
 		if ( ! class_exists( 'WC_allparcels_rankas' ) )
 			require(untrailingslashit( plugin_dir_path( __FILE__ ) ).'/includes/class-wc_allparcels_rankas.php');
 
@@ -29,6 +32,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 		if ( ! class_exists( 'WC_allparcels_taskas' ) )
 			require(untrailingslashit( plugin_dir_path( __FILE__ ) ).'/includes/class-wc_allparcels_taskas.php');
+
+
 	}
 	add_action( 'woocommerce_shipping_init', 'allparcels_init' );
 
@@ -40,4 +45,5 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		return $methods;
 	}
 	add_filter( 'woocommerce_shipping_methods', 'ap_add_allparcels' );
+
 }

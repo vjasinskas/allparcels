@@ -113,17 +113,17 @@ function ap_woo_custom_order_formatted_shipping_address  ($address, $wc_order) {
 		global $wpdb;
 
 		if($terminalui){
-			$terminals=$wpdb->get_results( "SELECT * FROM wp_allparcels_terminals WHERE identifier='$terminalui';",ARRAY_A );
+			$terminals=json_decode ( Terminals::getTerminalsList($terminalui), true );
 			$string=$terminals[0]['name'].' '.$terminals[0]['address'].' '.$terminals[0]['city'].' '.$terminals[0]['postCode'];
 
 			$address['postcode'] = $address['postcode']."\n".__('Paštomatas: ','mancanweb').$string."\n";
 		}else if($skyriui){
-			$terminals=$wpdb->get_results( "SELECT * FROM wp_allparcels_terminals WHERE identifier='$skyriui';",ARRAY_A );
+			$terminals=json_decode ( Terminals::getTerminalsList($skyriui), true );
 			$string.=$terminals[0]['name'].' '.$terminals[0]['address'].' '.$terminals[0]['city'].' '.$terminals[0]['postCode'];
 
 			$address['postcode'] = $address['postcode']."\n".__('Pašto skyrius: ','mancanweb').$string."\n";
 		}else if($taskui){
-			$terminals=$wpdb->get_results( "SELECT * FROM wp_allparcels_terminals WHERE identifier='$taskui';",ARRAY_A );
+			$terminals=json_decode ( Terminals::getTerminalsList($taskui), true );
 			$string.=$terminals[0]['name'].' '.$terminals[0]['address'].' '.$terminals[0]['city'].' '.$terminals[0]['postCode'];
 
 			$address['postcode'] = $address['postcode']."\n".__('Pristatymo punktas: ','mancanweb').$string."\n";
