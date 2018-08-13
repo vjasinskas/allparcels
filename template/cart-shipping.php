@@ -81,6 +81,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     }
 
                                 if($chosen_method == $method->id) {
+                                    $string='';
 	                                if ( sizeof( $pastomatai ) > 0  && $type != '*') {
 		                                $string .= '<select name="' . $method->method_id . '" id="input_' . $method->method_id . '" class="allparcels_select" required>';
 		                                $string .= '<option value="">' . __( "Pasirinkite...", "mancanweb" ) . '</option>';

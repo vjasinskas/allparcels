@@ -39,7 +39,6 @@ $settings = array (
                 'title' => __ ( 'Kaina', 'mancanweb' ),
                 'type' => 'text',
                 'placeholder' => '',
-                'description' => $cost_desc,
                 'default' => '',
                 'desc_tip' => true 
         ),
@@ -69,7 +68,6 @@ if ( ! empty( $shipping_classes ) ) {
 			'title'       => sprintf( __( '"%s" shipping class cost', 'woocommerce' ), esc_html( $shipping_class->name ) ),
 			'type'        => 'text',
 			'placeholder' => __( 'N/A', 'woocommerce' ),
-			'description' => $cost_desc,
 			'default'     => $this->get_option( 'class_cost_' . $shipping_class->slug ), // Before 2.5.0, we used slug here which caused issues with long setting names
 			'desc_tip'    => true,
 		);
@@ -78,7 +76,6 @@ if ( ! empty( $shipping_classes ) ) {
 		'title'       => __( 'No shipping class cost', 'woocommerce' ),
 		'type'        => 'text',
 		'placeholder' => __( 'N/A', 'woocommerce' ),
-		'description' => $cost_desc,
 		'default'     => '',
 		'desc_tip'    => true,
 	);
